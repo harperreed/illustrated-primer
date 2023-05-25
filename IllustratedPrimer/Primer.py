@@ -23,6 +23,8 @@ class Primer:
 
         openai_model = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
         openai_temperature = os.getenv("OPENAI_TEMPERATURE", "0")
+        self.logger.debug(f"OpenAI Model: {openai_model}")
+        self.logger.debug(f"OpenAI Temperature: {openai_temperature}")
 
         self.chat = ChatOpenAI(model_name=openai_model, temperature=openai_temperature)
 
