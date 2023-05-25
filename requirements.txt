@@ -1,7 +1,5 @@
 paho-mqtt
 python-dotenv
 openai
-langchain
+langchain==0.0.133
 homeassistant_api
-typing-inspect==0.8.0
-typing_extensions==4.5.0
