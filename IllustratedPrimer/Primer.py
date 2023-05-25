@@ -1,5 +1,6 @@
 import logging
 import os
+import json
 from datetime import datetime
 import requests
 
@@ -16,6 +17,7 @@ class Primer:
 
         prompt_url = os.getenv("PRIMER_PROMPT_URL") 
         self.prompt_template = self.get_prompt(prompt_url)
+   
 
         openai_model = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
         openai_temperature = os.getenv("OPENAI_TEMPERATURE", "0")
@@ -46,16 +48,18 @@ class Primer:
         prompt = r.text
         return prompt
 
-    def generate_response(self, current_state):
+    def generate_response(self, payload):
         self.logger.debug("let's make a request to openai")
 
-        weather = self.get_hass_data()
-        time = datetime.now().time()
+        # convert the json payload to a dict
+        json_payload = json.loads(payload)
+        print(json_payload)
+
         with get_openai_callback() as cb:
-            prompt = PromptTemplate(template=self.prompt_template, input_variables=["weather", "time"])
+            prompt = PromptTemplate(template=self.prompt_template, input_variables=["context"])
             # get a chat completion from the formatted messages
             chain = LLMChain(llm=self.chat, prompt=prompt)
-            result = chain.run(weather=weather, time=time)
+            result = chain.run(context=payload)
             self.logger.debug(f"OpenAI Response: {result}")
             self.logger.info(f"Total Tokens: {cb.total_tokens}")
             self.logger.info(f"Prompt Tokens: {cb.prompt_tokens}")
