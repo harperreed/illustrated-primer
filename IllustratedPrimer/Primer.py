@@ -30,14 +30,12 @@ class Primer:
 
     def get_hass_data(self):
         self.logger.debug("let's get some data from hass")
-        with Client(
-            f'{os.getenv("HASS_URL")}/api/',
-            os.getenv("HASS_TOKEN")
-        ) as client:
+            
+        client = Client(f'{os.getenv("HASS_URL")}/api/', os.getenv("HASS_TOKEN"))
 
-            weather = client.get_entity(entity_id="weather.tomorrow_io_reedazawa_daily")
-            state = weather.get_state()
-            weather_str = f'{state.attributes["temperature"]} {state.attributes["temperature_unit"]} and {state.state}'
+        weather = client.get_entity(entity_id="weather.tomorrow_io_reedazawa_daily")
+        state = weather.get_state()
+        weather_str = f'{state.attributes["temperature"]} {state.attributes["temperature_unit"]} and {state.state}'
 
         return weather_str
 
