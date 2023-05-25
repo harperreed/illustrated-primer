@@ -9,10 +9,6 @@ from langchain import PromptTemplate, LLMChain
 from langchain.callbacks import get_openai_callback
 
 from homeassistant_api import Client
-from langchain.prompts import (
-    PromptTemplate,
-)
-
 
 class Primer:
     def __init__(self):
