@@ -34,9 +34,9 @@ class Primer:
 
             weather = client.get_entity(entity_id="weather.tomorrow_io_reedazawa_daily")
             state = weather.get_state()
-            # print(state.attributes)
+            weather_str = f'{state.attributes["temperature"]} {state.attributes["temperature_unit"]} and {state.state}'
 
-        return weather
+        return weather_str
 
     def get_prompt(self, url):
         self.logger.debug("let's get a prompt from github")
