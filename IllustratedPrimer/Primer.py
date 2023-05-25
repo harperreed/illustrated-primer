@@ -4,9 +4,10 @@ from datetime import datetime
 import requests
 
 from langchain.chat_models import ChatOpenAI
+from langchain.prompts import PromptTemplate
+from langchain import PromptTemplate, LLMChain
 from langchain.callbacks import get_openai_callback
 
-from langchain import PromptTemplate, LLMChain
 from homeassistant_api import Client
 from langchain.prompts import (
     PromptTemplate,
