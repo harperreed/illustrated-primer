@@ -1,0 +1,10 @@
+version: "2"
+services:
+  primer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: illustrated-primer
+    restart: unless-stopped
+    volumes:
+      - ./.env:/app/.env
